@@ -2,7 +2,7 @@ import os
 from hypergraphrag import HyperGraphRAG
 from hypergraphrag.llm import bge_embedding_local
 
-os.environ["OPENAI_API_KEY"] = "sk-YPr0hlW1DGGSo9My0c2dB036C0414bEe96D6Ea7a32945cC4"
+# os.environ["OPENAI_API_KEY"] = "YOUR_API_KEY"
 
 rag = HyperGraphRAG(
     embedding_func=bge_embedding_local,
