@@ -39,7 +39,7 @@ if not os.path.exists(WORKING_DIR):
 rag = HyperGraphRAG(
     working_dir=WORKING_DIR,
     embedding_func_max_async=32,
-    llm_model_max_async=32,
+    llm_model_max_async=1,
     embedding_func=bge_embedding_local,
     chunk_token_size=512,
     chunk_overlap_token_size=64,
