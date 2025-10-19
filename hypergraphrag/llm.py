@@ -56,7 +56,7 @@ async def openai_complete_if_cache(
     prompt,
     system_prompt=None,
     history_messages=[],
-    base_url="https://vip.apiyi.com/v1",
+    base_url="https://api.siliconflow.cn/v1",
     api_key=None,
     **kwargs,
 ) -> str:
@@ -510,6 +510,20 @@ async def gpt_4o_mini_complete(
         kwargs["response_format"] = GPTKeywordExtractionFormat
     return await openai_complete_if_cache(
         "gpt-4o-mini",
+        prompt,
+        system_prompt=system_prompt,
+        history_messages=history_messages,
+        **kwargs,
+    )
+
+async def qwen_2_dot_5_7B_complete(
+    prompt, system_prompt=None, history_messages=[], keyword_extraction=False, **kwargs
+) -> str:
+    keyword_extraction=kwargs.pop("keyword_extraction", None)
+    if keyword_extraction:
+        kwargs["response_format"] = GPTKeywordExtractionFormat
+    return await openai_complete_if_cache(
+        "Qwen/Qwen2.5-7B-Instruct",
         prompt,
         system_prompt=system_prompt,
         history_messages=history_messages,

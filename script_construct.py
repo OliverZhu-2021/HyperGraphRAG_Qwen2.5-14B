@@ -3,7 +3,7 @@ import json
 from hypergraphrag import HyperGraphRAG
 from hypergraphrag.llm import bge_embedding_local
 
-# os.environ["OPENAI_API_KEY"] = "PLACE YOUR OPENAI API KEY HERE"
+os.environ["OPENAI_API_KEY"] = "YOUR_OPENAI_API"
 
 rag = HyperGraphRAG(
     embedding_func=bge_embedding_local,
