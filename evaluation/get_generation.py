@@ -12,7 +12,7 @@ methods = args.methods.split(',')
 data_sources = args.data_sources.split(',')
 
 os.environ["OPENAI_API_KEY"] = open("openai_api_key.txt").read().strip()
-client = OpenAI(base_url="https://vip.apiyi.com/v1")
+client = OpenAI(base_url="https://api.siliconflow.cn/v1")
 
 def generate_response(d):
     # d['knowledge'] = ' '.join(d['knowledge'].split(' ')[:1200])
@@ -45,7 +45,7 @@ Output format for answer:
     
     try:
         response = client.chat.completions.create(
-            model="gpt-4o-mini",
+            model="Qwen/Qwen2.5-14B-Instruct",
             messages=[{"role": "user", "content": prompt}]
         )
         d['generated_answer'] = response.choices[0].message.content
@@ -66,7 +66,7 @@ def process_method(method):
                 item['gold_answer'] = item.pop('answer')
 
         results = []
-        with ThreadPoolExecutor(max_workers=32) as executor:
+        with ThreadPoolExecutor(max_workers=16) as executor:
             futures = [executor.submit(generate_response, d) for d in data]
             for future in tqdm(as_completed(futures), total=len(futures), desc=f"{method}"):
                 results.append(future.result())
