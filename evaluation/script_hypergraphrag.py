@@ -31,7 +31,7 @@ rag = HyperGraphRAG(
 
 async def query_with_semaphore(sem, q):
     async with sem:
-        return await rag.aquery(q, QueryParam(only_need_context=True))
+        return await rag.aquery(q, QueryParam(mode="hybrid", only_need_context=True))
 
 async def main():
     with open(f"datasets/{data_source}/questions.json", encoding='utf-8') as f:

@@ -14,14 +14,14 @@ if __name__ == "__main__":
         data = json.load(f)
     questions = [item['question'] for item in data]
     for d,q in tqdm(zip(data, questions)):
-        d['context'] = d['context'].split("-----Sources-----")[-1]
+        d['context'] = d['context'].split("-----Sources-----")[0]
         
-    save_dir = f"results/StandardRAG/{data_source}/test_context.json"
+    save_dir = f"results/wo_CR/{data_source}/test_context.json"
     if os.path.exists(save_dir):
         os.remove(save_dir)
     if not os.path.exists(os.path.dirname(save_dir)):
         os.makedirs(os.path.dirname(save_dir))
         
-    with open(f"results/StandardRAG/{data_source}/test_context.json", 'w', encoding='utf-8') as f:
+    with open(f"results/wo_CR/{data_source}/test_context.json", 'w', encoding='utf-8') as f:
         json.dump(data, f, indent=4)
     print(f"Results saved to {save_dir}")
